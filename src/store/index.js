@@ -6,6 +6,12 @@ const counterReducer = (state = { counter: 0 }, action) => {
       counter: state.counter + 1,
     };
   }
+  // often a dispatch action carries extra data
+  if (action.type === "increase") {
+    return {
+      counter: state.counter + action.amount,
+    };
+  }
   if (action.type === "decrement") {
     return {
       counter: state.counter - 1,
