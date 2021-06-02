@@ -1,7 +1,7 @@
 // import { createStore } from "redux";
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { counter: 0, showCounter: true };
+const initialCounterState = { counter: 0, showCounter: true };
 
 // it wants an object as an argument
 // it is preparing a slice of our global state
@@ -9,7 +9,7 @@ const initialState = { counter: 0, showCounter: true };
 // every slice needs a name
 const counterSlice = createSlice({
   name: "counter",
-  initialState: initialState,
+  initialState: initialCounterState,
   // a map of all the reducers this state slice needs
   reducers: {
     // every method recieves the latest state
@@ -35,6 +35,23 @@ const counterSlice = createSlice({
   },
 });
 
+const initialAuthState = {
+  isAuthenticated: false,
+};
+
+const authSlice = createSlice({
+  name: "authentication",
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+
 // this is an object full of keys
 // where the key names match the method names
 // counterSlice.actions.toggleCounter
@@ -46,10 +63,11 @@ const counterSlice = createSlice({
 // values of those keys would be different reducer funcs
 // we would create a map of reducers
 const store = configureStore({
-  reducer: counterSlice.reducer,
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
 });
 
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 export default store;
 // const counterReducer = (state = initialState, action) => {

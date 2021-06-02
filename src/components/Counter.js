@@ -13,8 +13,8 @@ const Counter = () => {
   // this function determines which part of the state we want to extract from the store
   // we send a state managed by redux and we recieve a part of the state we need
   // when we use useSelector, redux will automatically set a subscription to the redux store for this component
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
 
   const incrementHandler = () => {
     dispatch(counterActions.increment());
